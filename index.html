@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Xom Education</title>
+  <style>
+    :root{
+      --blue:#1b2aa3; /* deep brand blue */
+      --accent:#111155;
+      --bg:#f8f8ff;
+      --card-border: #12208f;
+      --muted:#666;
+      --card-radius:18px;
+      --gap:18px;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    /* Reset-ish */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#0b0b2b;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    /* Top nav */
+    .topbar{
+      background:var(--blue);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 18px;
+      position:sticky;
+      top:0;
+      z-index:50;
+      box-shadow:0 2px 0 rgba(0,0,0,0.06);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .brand img{
+      width:48px;
+      height:48px;
+      object-fit:cover;
+      border-radius:8px;
+      background: white;
+      padding:4px;
+    }
+    .brand h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:0.4px;
+      font-weight:700;
+    }
+
+    nav ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    nav a{
+      color:white;
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:8px;
+      font-weight:600;
+      font-size:14px;
+      opacity:0.95;
+    }
+    nav a:hover{background:rgba(255,255,255,0.08)}
+
+    /* Language switcher */
+    .lang-switch{
+      display:flex;
+      gap:6px;
+      margin-left:12px;
+    }
+    .lang-btn{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.15);
+      padding:6px 8px;
+      color:white;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:13px;
+    }
+    .lang-btn.active{background:white;color:var(--blue)}
+
+    /* Main hero area */
+    .container{
+      max-width:980px;
+      margin:26px auto;
+      padding:0 14px 80px;
+    }
+
+    .hero{
+      text-align:center;
+      margin-bottom:22px;
+    }
+    .hero h2{
+      color:var(--blue);
+      font-size:28px;
+      margin:6px 0 10px;
+      font-weight:800;
+    }
+    .hero p.subtitle{
+      max-width:760px;
+      margin:0 auto;
+      color:var(--muted);
+      font-weight:600;
+      font-size:15px;
+      line-height:1.45;
+    }
+
+    /* Categories grid (cards) */
+    .grid{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:var(--gap);
+    }
+
+    /* card styling matches the rounded bordered boxes in your image */
+    .card{
+      background:white;
+      border-radius:var(--card-radius);
+      padding:14px;
+      min-height:96px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border:6px solid var(--card-border);
+      box-shadow: 0 6px 18px rgba(6,12,80,0.04);
+    }
+
+    .card .title{
+      font-weight:700;
+      font-size:15px;
+      color:#111;
+      padding-right:12px;
+    }
+
+    .card .pl{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      background:#ddd;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: inset 0 -2px 6px rgba(0,0,0,0.06);
+      flex-shrink:0;
+      overflow:hidden;
+      border:4px solid rgba(0,0,0,0.06);
+    }
+    /* images inside placeholders are full-size and rounded */
+    .card .pl img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:50%;
+      display:block;
+    }
+
+    /* Footer */
+    footer{
+      margin-top:28px;
+      padding:18px 14px;
+    }
+    .footer-inner{
+      max-width:980px;
+      margin:0 auto;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .socials{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .socials a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:40px;
+      height:40px;
+      border-radius:8px;
+      background:white;
+      text-decoration:none;
+      color:var(--blue);
+      border:1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 6px 18px rgba(6,12,80,0.04);
+    }
+    .copyright{
+      color:var(--muted);
+      font-size:14px;
+      font-weight:600;
+    }
+
+    /* responsiveness */
+    @media (max-width:820px){
+      .grid{grid-template-columns:repeat(2, 1fr)}
+    }
+    @media (max-width:520px){
+      nav ul{display:none} /* mobile hide full nav to keep header compact */
+      .brand h1{font-size:16px}
+      .grid{grid-template-columns:repeat(2, 1fr); gap:12px}
+      .hero h2{font-size:22px}
+    }
+    @media (max-width:380px){
+      .grid{grid-template-columns:1fr; gap:12px}
+      .card{padding:12px}
+    }
+
+    /* clickable look for cards */
+    .card a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      width:100%;
+      text-decoration:none;
+      color:inherit;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" role="banner">
+    <div class="brand" aria-label="Xom Education">
+      <!-- NOTE: using the uploaded image path from your conversation history as the logo.
+           Replace with "logo.jpg" if you prefer to use a file named logo.jpg in the same folder. -->
+      <img src="logo.jpg" alt="Xom Education logo" id="logo">
+      <h1 id="site-name">Xom Education</h1>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px">
+      <nav aria-label="Main navigation">
+        <ul id="nav-list">
+          <li><a href="#home" data-key="navHome">Home</a></li>
+          <li><a href="#courses" data-key="navCourses">Courses</a></li>
+          <li><a href="#about" data-key="navAbout">About</a></li>
+          <li><a href="#login" data-key="navLogin">Login</a></li>
+          <li><a href="#signup" data-key="navSignup">Sign Up</a></li>
+        </ul>
+      </nav>
+
+      <div class="lang-switch" role="group" aria-label="Language switcher">
+        <button class="lang-btn active" id="btn-en" data-lang="en">EN</button>
+        <button class="lang-btn" id="btn-fr" data-lang="fr">FR</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" aria-labelledby="main-headline">
+      <h2 id="main-headline" data-key="headline">Welcome to Xom Education!</h2>
+      <p class="subtitle" id="subtitle" data-key="subtitle">
+        Your Future, Your Choice. Choose your field — English, technology, or personal growth — and start learning today. Upgrade your skills, mindset, and destiny.
+      </p>
+    </section>
+
+    <section aria-label="Categories" class="categories">
+      <div class="grid" id="cards-grid">
+        <!-- Each card is clickable (links are placeholders to be implemented later) -->
+        <div class="card"><a href="#ai" data-key-title="AI">
+          <div class="title" data-key-text="Artificial Intelligence">
+            Artificial Intelligence</div><div class="pl">
+              <img alt="AI" src="https://i.pinimg.com/1200x/20/a4/9d/20a49d22e1a70a845dd7fe60fe5b60f4.jpg
+              "></div></a></div>
+<div class="card">
+  <a href="#travels" data-key-title="Travels">
+    <div class="title" data-key-text="Travels">Travels</div>
+    <div class="pl">
+      <img 
+        alt="Travels"
+        src="https://i.pinimg.com/736x/c2/19/98/c21998c2328225e2c743193e27b8eb68.jpg"
+      >
+    </div>
+  </a>
+</div>      
+        <div class="card"><a href="#software"><div class="title">Software Engineering</div>
+          <div class="pl"><img alt="Software" src="https://i.pinimg.com/736x/a3/6d/d9/a36dd9e3607f60f4ae76f124e0b388a8.jpg"></div></a></div>
+
+        <div class="card"><a href="#dm-ecom"><div class="title">Digital Marketing &amp;
+           E-Commerce</div><div class="pl"><img alt="DM" src="https://i.pinimg.com/736x/d5/14/5d/d5145dbba2f8465d83a9326a5595007d.jpg"></div></a></div>
+
+        <div class="card"><a href="#cyber"><div class="title">Cybersecurity</div><div class="pl">
+          <img alt="Cybersecurity" src="https://i.pinimg.com/736x/9c/43/20/9c4320831635a10ba15e3d8bbc0a2089.jpg">
+          "></div></a></div>
+
+        <div class="card"><a href="#datasci"><div class="title">Data Science</div><div class="pl">
+          <img alt="Data Science" src="https://i.pinimg.com/736x/54/4e/fe/544efeb33f1f8fd91bb71d0712045406.jpg"></div></a></div>
+
+        <div class="card"><a href="#telemed"><div class="title">Telemedicine</div><div class="pl">
+          <img alt="Telemedicine" src="https://i.pinimg.com/736x/a5/3d/ed/a53dedfc53d6413cdc115e1302c82517.jpg"></div></a></div>
+
+        <div class="card"><a href="#cloud"><div class="title">Cloud Computing</div><div class="pl">
+          <img alt="Cloud" src="https://i.pinimg.com/736x/3d/f1/be/3df1be1c703f55ffd5cef47a3ad4ef12.jpg"></div></a></div>
+
+        <div class="card"><a href="#entrepreneur"><div class="title">Entrepreneurship &amp; Business
+        </div><div class="pl"><img alt="Business" src="https://i.pinimg.com/736x/4d/2e/f2/4d2ef256160e9b02d437e537a92974a1.jpg"></div></a></div>
+        <div class="card"><a href="#blockchain"><div>Blockchain &amp; Web3</div><div class="pl">
+          <img alt="Blockchain" src="web.jpg"></div></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="socials" aria-label="Social links">
+        <!-- Facebook -->
+        <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener">
+          <!-- simple FB icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 4.99 3.66 9.12 8.44 9.93v-7.04H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3V22c4.78-.81 8.44-4.94 8.44-9.93z" fill="#1b2aa3"/>
+          </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 24h5V7H0v17zM7 7h4.78v2.37h.07c.66-1.25 2.27-2.57 4.67-2.57C22.09 6.8 24 9.2 24 13.35V24h-5v-9.4c0-2.24-.04-5.12-3.12-5.12-3.12 0-3.6 2.44-3.6 4.97V24H7V7z" fill="#1b2aa3"/>
+          </svg>
+        </a>
+
+        <!-- X (Twitter) -->
+        <a href="https://x.com" aria-label="X (Twitter)" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M23 4.56c-.8.36-1.66.6-2.56.71.92-.56 1.62-1.45 1.95-2.51-.86.51-1.81.88-2.82 1.08C18.73 3.6 17.57 3 16.29 3c-1.83 0-3.32 1.5-3.32 3.34 0 .26.02.52.08.77C9.69 6.98 6.13 5.1 3.61 2.2c-.28.49-.44 1.06-.44 1.67 0 1.15.58 2.16 1.47 2.75-.54-.02-1.05-.16-1.5-.4v.04c0 1.61 1.13 2.95 2.6 3.26-.48.13-.98.2-1.49.2-.36 0-.7-.04-1.04-.1.7 2.18 2.73 3.76 5.13 3.81-1.87 1.45-4.24 2.31-6.82 2.31-.44 0-.87-.03-1.3-.08 2.5 1.58 5.47 2.49 8.66 2.49 10.38 0 16.06-8.87 16.06-16.56v-.75C22.03 6.3 22.6 5.5 23 4.56z" fill="#1b2aa3"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="copyright" id="footer-text">
+        © xomeducation.com All rights reserved 2025
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Bilingual content strings */
+    const strings = {
+      en: {
+        navHome: "Home",
+        navCourses: "Courses",
+        navAbout: "About",
+        navLogin: "Login",
+        navSignup: "Sign Up",
+        headline: "Welcome to Xom Education!",
+        subtitle: "Your Future, Your Choice. Choose your field — English, technology, or personal growth — and start learning today. Upgrade your skills, mindset, and destiny.",
+        categories: [
+          "Artificial Intelligence",
+          "Travels",
+          "Software Engineering",
+          "Digital Marketing & E-Commerce",
+          "Cybersecurity",
+          "Data Science",
+          "Telemedicine",
+          "Cloud Computing",
+          "Entrepreneurship & Business",
+          "Blockchain & Web3"
+        ],
+        footer: "© xomeducation.com All rights reserved 2025"
+      },
+
+      fr: {
+        navHome: "Accueil",
+        navCourses: "Cours",
+        navAbout: "À propos",
+        navLogin: "Connexion",
+        navSignup: "Inscription",
+        headline: "Bienvenue à Xom Education !",
+        subtitle: "Votre avenir, votre choix. Choisissez votre domaine — anglais, technologie ou développement personnel — et commencez à apprendre aujourd'hui. Améliorez vos compétences, votre état d'esprit et votre destinée.",
+        categories: [
+          "Intelligence Artificielle",
+          "Voyages",
+          "Génie Logiciel",
+          "Marketing Digital & E-Commerce",
+          "Cybersécurité",
+          "Science des Données",
+          "Télémédecine",
+          "Informatique en Nuage",
+          "Entrepreneuriat & Business",
+          "Blockchain & Web3"
+        ],
+        footer: "© xomeducation.com Tous droits réservés 2025"
+      }
+    };
+
+    /* Language toggle */
+    const btnEn = document.getElementById('btn-en');
+    const btnFr = document.getElementById('btn-fr');
+
+    function setLanguage(lang){
+      // Update active button
+      btnEn.classList.toggle('active', lang==='en');
+      btnFr.classList.toggle('active', lang==='fr');
+
+      const s = strings[lang];
+
+      // Update nav link texts (we used data-key attributes)
+      document.querySelectorAll('#nav-list a').forEach(a=>{
+        const key = a.getAttribute('data-key');
+        if(key && s[key] !== undefined){
+          a.textContent = s[key];
+        }
+      });
+
+      // Headline and subtitle
+      const h = document.querySelector('[data-key="headline"]');
+      const sub = document.getElementById('subtitle');
+      if(h) h.textContent = s.headline;
+      if(sub) sub.textContent = s.subtitle;
+
+      // Cards titles: update from strings.categories
+      const grid = document.getElementById('cards-grid');
+      const cardTitles = grid.querySelectorAll('.title');
+      cardTitles.forEach((el, idx) => {
+        el.textContent = s.categories[idx] || el.textContent;
+      });
+
+      // Footer
+      const ft = document.getElementById('footer-text');
+      if(ft) ft.textContent = s.footer;
+    }
+
+    btnEn.addEventListener('click', ()=>setLanguage('en'));
+    btnFr.addEventListener('click', ()=>setLanguage('fr'));
+
+    // initialize default
+    setLanguage('en');
+
+    // Keep nav links clickable but they are placeholders — they can be replaced with real pages.
+    // Accessibility: allow keyboard toggle
+    btnEn.addEventListener('keyup', e => { if(e.key==='Enter') setLanguage('en')});
+    btnFr.addEventListener('keyup', e => { if(e.key==='Enter') setLanguage('fr')});
+  </script>
+</body>
+</html>
