@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About - Xom Education</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background-color: #fff; margin: 0; padding: 2rem; color: #222; }
+    section { max-width: 800px; margin: auto; }
+    h1 { font-size: 2em; color: #000; }
+    p, li { font-size: 1.1rem; line-height: 1.6; }
+    [data-lang] { display: none; }
+  </style>
+</head>
+<body>
+
+<section data-lang="en">
+  <h1>Xom Education — Learn to Lead the Future</h1>
+  <p>At Xom Education, we don’t just teach English. We prepare you to lead in a world driven by innovation, technology, and global skills.</p>
+
+  <p>Whether your goal is to master Artificial Intelligence, Cybersecurity, Digital Marketing, or Software Development — we believe the language of the future is <strong>technical English</strong> with purpose.</p>
+
+  <h2>Why Xom Education?</h2>
+  <ul>
+    <li>🔥 Learn English while learning a skill that pays.</li><li>📹 Live classes, video replays, texts, and audio for every lesson.</li>
+    <li>🌍 Join a real learning community via WhatsApp for direct teacher contact.</li>
+    <li>💡 No fluff. Just results, confidence, and international opportunity.</li>
+  </ul>
+
+  <p>Elon Musk builds rockets. Mark Zuckerberg builds platforms. At Xom Education, <strong>we build people</strong>.</p>
+</section>
+
+<section data-lang="fr">
+  <h1>Xom Education — Apprenez à diriger le futur</h1>
+  <p>Chez Xom Education, nous ne vous apprenons pas seulement l’anglais. Nous vous préparons à diriger dans un monde d'innovation, de technologie et de compétences globales.</p>
+
+  <p>Que votre objectif soit de maîtriser l’Intelligence Artificielle, la Cybersécurité, le Marketing Digital ou le Développement Logiciel — nous croyons que la langue du futur est <strong>l’anglais technique avec un but</strong>.</p>
+
+  <h2>Pourquoi Xom Education ?</h2>
+  <ul>
+    <li>🔥 Apprenez l'anglais tout en acquérant une compétence monétisable.</li>
+    <li>📹 Cours en direct, replays vidéo, textes et audios à chaque leçon.</li>
+    <li>🌍 Rejoignez une vraie communauté d’apprentissage via WhatsApp avec vos enseignants.</li>
+    <li>💡 Pas de bla-bla. Juste des résultats, de la confiance et des opportunités internationales.</li>
+  </ul><p>Elon Musk construit des fusées. Mark Zuckerberg crée des plateformes. Chez Xom Education, <strong>nous construisons des personnes</strong>.</p>
+</section>
+
+<script>
+  const lang = localStorage.getItem('lang') || 'en';
+  document.querySelectorAll('[data-lang]').forEach(section => {
+    section.style.display = section.getAttribute('data-lang') === lang ? 'block' : 'none';
+  });
+</script>
+
+</body>
+</html>
