@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Suscription</title>
+  <style>
+    body {
+      background-color: #0a1c84;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    form {
+      max-width: 350px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 0 10px #00000066;
+    }
+
+    input, button {
+      display: block;
+      width: 100%;
+      margin: 19px 0;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    button {
+      background: linear-gradient(to right, #00c6ff, #bc00dd);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    p.footer {
+      font-size: 10px;
+      color: white;
+      margin-top: 30px;
+    }a {
+      color: #ccc; text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Inscription au Cours d'anglais</h2>
+  <h1>OPTION: <span id="course-title">...</span></h1>
+  <p><a href="about.html">Learn more on about section</a></p>
+
+  <form id="subscriptionForm">
+    <input type="hidden" name="option" id="courseOption" />
+    <input type="text" name="firstName" id="firstName" placeholder="First name" required />
+    <input type="text" name="lastName" id="lastName" placeholder="Last name" required />
+    <input type="email" name="email" id="email" placeholder="Email" required />
+    <input type="text" name="whatsapp" id="whatsapp" placeholder="WhatsApp number" required />
+    <input type="text" name="country" id="country" placeholder="Country" required />
+    <button type="submit">Subscribe</button>
+  </form>
+
+  <p class="footer">Power by Xom Education</p>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const course = urlParams.get("course");
+    if (course) {
+      document.getElementById('course-title').innerText = course.toUpperCase();
+      document.getElementById('courseOption').value = course;
+    }
+
+    document.getElementById("subscriptionForm").addEventListener("submit", async function (e) {
+      e.preventDefault();const formData = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        whatsapp: document.getElementById("whatsapp").value,
+        country: document.getElementById("country").value,
+        option: document.getElementById("courseOption").value
+      };
+
+      try {
+        const res = await fetch("https://xom-backend.onrender.com/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await res.json();
+        alert("Subscription successful!");
+        document.getElementById("subscriptionForm").reset();
+      } catch (err) {
+        console.error(err);
+        alert("An error occurred. Please try again.");
+      }
+    });
+  </script>
+
+</body>
+</html>
